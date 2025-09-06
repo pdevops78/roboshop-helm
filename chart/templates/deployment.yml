@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.metadata.name }}
+  namespace: argocd
+  labels:
+    appName: {{ .Values.labels.appName }}
+    project_Name: {{ .Chart.Name }}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      appName: {{ .Values.labels.appName }}
+      project_Name: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        appName: {{ .Values.labels.appName }}
+        project_Name: {{ .Chart.Name }}
+    spec:
+     {{- if .Values.initContainers.enabled }}
+      volumes:
+        - name: secrets
+          emptyDir:
+            sizeLimit: 5Mi
+      initContainers:
+        - name: vault-secrets
+          image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/vault-initcontainer:1.0.1
+          env:
+            - name: VAULT_ADDR
+              value: "https://vault-internal.pdevops78.online:8200"
+            - name: VAULT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: vault-token
+                  key: token
+            - name: SECRET_NAME
+              value: roboshop-dev/catalogue
+            - name: VAULT_SKIP_VERIFY
+              value: "TRUE"
+          volumeMounts:
+            - name: secrets
+              mountPath: /data
+
+      {{- end }}
+
+      containers:
+        - name: {{ .Values.component }}
+          image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/roboshop-{{ .Values.component }}:{{ .Values.containers.appVersion }}
+      {{- if .Values.initContainers.enabled }}
+          volumeMounts:
+            - name: secrets
+              mountPath: /data
+      {{- end }}
