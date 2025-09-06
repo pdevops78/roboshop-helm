@@ -13,7 +13,7 @@ initContainers:
 schema:
   schema_imageVersion: 1.0.2
   enabled: true
-  db_name: mongo
+  db_type: mongo
 containers:
   appVersion: 2.0.2
   name: catalogue
