@@ -9,7 +9,7 @@ selector:
   project_name: expense
 initContainers:
   enabled: true
-  imageVersion: 1.0.5
+  imageVersion: 2.0.1
 schema:
   schema_imageVersion: 1.0.2
   enabled: false
