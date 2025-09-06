@@ -25,7 +25,7 @@ spec:
             sizeLimit: 5Mi
       initContainers:
         - name: vault-secrets
-          image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/vault-initcontainer:1.0.1
+          image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/vault-initcontainer:{{ .Values.initContainers.imageVersion }}
           env:
             - name: VAULT_ADDR
               value: "https://vault-internal.pdevops78.online:8200"
@@ -35,7 +35,7 @@ spec:
                   name: vault-token
                   key: token
             - name: SECRET_NAME
-              value: roboshop-dev/catalogue
+              value: roboshop-dev/{{ .Values.component }}
             - name: VAULT_SKIP_VERIFY
               value: "TRUE"
           volumeMounts:
