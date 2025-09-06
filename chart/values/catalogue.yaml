@@ -11,7 +11,7 @@ initContainers:
   enabled: true
   imageVersion: 1.0.5
 schema:
-  schema_imageVersion: 2.0.1
+  schema_imageVersion: 2.0.3
   enabled: true
   db_type: mongo
 containers:
