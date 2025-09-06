@@ -2,16 +2,16 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ .Values.component }}
+  name: catalogue
   namespace: argocd
   labels:
-    appName: {{ .Values.labels.appName }}
+    appName: catalogue
     projectName: {{ .Chart.Name }}
 spec:
   template:
     metadata:
       labels:
-        appName: {{ .Values.labels.appName }}
+        appName: catalogue
         projectName: {{ .Chart.Name }}
     spec:
       volumes:
