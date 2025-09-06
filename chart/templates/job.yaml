@@ -38,7 +38,7 @@ spec:
 
       containers:
         - name: schema
-          image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/backend-schema:{{ .Values.schema.schema_imageVersion }}
+          image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/backend-schema:2.0.1
           env:
             - name: db_type
               value: "{{ .Values.schema.db_type }}"
