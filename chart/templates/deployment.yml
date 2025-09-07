@@ -23,27 +23,26 @@ spec:
         - name: secrets
           emptyDir:
             sizeLimit: 5Mi
-      {{- if .Values.initContainers.vault_init_containers.enabled }}
-      initContainers:
-        - name: vault-secrets
-          image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/vault-initcontainer:2.0.2
-          env:
-            - name: VAULT_ADDR
-              value: "https://vault-internal.pdevops78.online:8200"
-            - name: VAULT_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: vault-token
-                  key: token
-            - name: SECRET_NAME
-              value: roboshop-dev/catalogue
-            - name: VAULT_SKIP_VERIFY
-              value: "TRUE"
-          volumeMounts:
-            - name: secrets
-              mountPath: /data
-
-      {{-end }}
+     {{ - if (default false .Values.initContainers.vault_init_containers.enabled) }}
+    initContainers:
+      - name: vault-secrets
+        image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/vault-initcontainer:2.0.2
+        env:
+          - name: VAULT_ADDR
+            value: "https://vault-internal.pdevops78.online:8200"
+          - name: VAULT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: vault-token
+                key: token
+          - name: SECRET_NAME
+            value: roboshop-dev/catalogue
+          - name: VAULT_SKIP_VERIFY
+            value: "TRUE"
+        volumeMounts:
+          - name: secrets
+            mountPath: /data
+    {{- end }}
 
         - name: schema
           image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/backend-schema:2.0.5
