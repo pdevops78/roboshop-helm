@@ -4,18 +4,18 @@ metadata:
   name: {{ .Values.metadata.name }}
   namespace: argocd
   labels:
-    appName: {{ .Values.labels.appName }}
+    appName: {{ .Values.component }}
     project_Name: {{ .Chart.Name }}
 spec:
   replicas: 2
   selector:
     matchLabels:
-      appName: {{ .Values.labels.appName }}
+      appName: {{ .Values.component }}
       project_Name: {{ .Chart.Name }}
   template:
     metadata:
       labels:
-        appName: {{ .Values.labels.appName }}
+        appName: {{ .Values.component }}
         project_Name: {{ .Chart.Name }}
     spec:
      {{- if .Values.initContainers.enabled }}
@@ -23,6 +23,7 @@ spec:
         - name: secrets
           emptyDir:
             sizeLimit: 5Mi
+      {{- if .Values.initContainers.intContainers.enabled }}
       initContainers:
         - name: vault-secrets
           image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/vault-initcontainer:{{ .Values.initContainers.imageVersion }}
@@ -41,12 +42,15 @@ spec:
           volumeMounts:
             - name: secrets
               mountPath: /data
-        - name: schema
-          image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/backend-schema:{{ .Values.schema.schema_imageVersion }}
-          volumeMounts:
-            - name: secrets
-              mountPath: /data
+      {{- end }}
 
+           {{- if .Values.initContainers.schemaContainers.enabled }}
+           - name: schema
+             image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/backend-schema:{{ .Values.schema.schema_imageVersion }}
+             volumeMounts:
+               - name: secrets
+                 mountPath: /data
+      {{- end }}
       {{- end }}
 
       containers:
