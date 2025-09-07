@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     appName: {{ .Values.component }}
-    projectName: {{ .Chart.Name }}
+    project_Name: {{ .Chart.Name }}
   ports:
     - name: http
       protocol: TCP
