@@ -6,7 +6,7 @@ initContainers:
   enabled: false
 
 containers:
-  appVersion: 1.0.2
+  appVersion: 1.0.3
   name: frontend
 
 schema:
