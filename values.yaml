@@ -1,0 +1,8 @@
+initContainers:
+  enabled: false
+  intContainers.enabled: false
+
+
+schema:
+  enabled: false
+  schemaContainers.enabled: false

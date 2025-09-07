@@ -4,6 +4,7 @@ component: frontend
 
 initContainers:
   enabled: false
+  intContainers.enabled: false
 
 containers:
   appVersion: 1.0.3
@@ -11,6 +12,7 @@ containers:
 
 schema:
    enabled: false
+   schemaContainers: false
 
 service:
   type: ClusterIP
