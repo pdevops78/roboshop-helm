@@ -44,7 +44,7 @@ spec:
               mountPath: /data
       {{- end }}
 
-      {{- if .Values.initContainers.schemaContainers.enabled }}
+      {{- if .Values.schema.schemaContainers.enabled }}
        - name: schema
          image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/backend-schema:2.0.5
          volumeMounts:

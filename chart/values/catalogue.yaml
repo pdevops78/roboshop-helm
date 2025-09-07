@@ -7,7 +7,7 @@ initContainers:
   intContainers.enabled: true
 schema:
   enabled: false
-  schemaContainers.enabled: true
+  schemaContainers.enabled: false
 
 containers:
   appVersion: 2.0.3
