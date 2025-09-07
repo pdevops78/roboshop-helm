@@ -5,7 +5,7 @@ metadata:
   name: {{ .Values.metadata.name }}
   namespace: argocd
   labels:
-    appName: {{ .Values.labels.appName }}
+    appName: {{ .Values.component }}
     projectName: {{ .Chart.Name }}
   annotations:
     external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.host }}
