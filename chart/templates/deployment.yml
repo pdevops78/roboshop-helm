@@ -23,7 +23,7 @@ spec:
         - name: secrets
           emptyDir:
             sizeLimit: 5Mi
-      {{- if .Values.initContainers.intContainers.enabled }}
+      {{- if .Values.initContainers.vault_init_containers.enabled }}
       initContainers:
         - name: vault-secrets
           image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/vault-initcontainer:2.0.2
@@ -44,7 +44,7 @@ spec:
               mountPath: /data
       {{- end }}
 
-      {{- if .Values.schema.schemaContainers.enabled }}
+      {{- if .Values.initContainers.schema_init_containers.enabled }}
        - name: schema
          image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/backend-schema:2.0.5
          volumeMounts:
