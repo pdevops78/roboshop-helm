@@ -23,7 +23,7 @@ spec:
         - name: secrets
           emptyDir:
             sizeLimit: 5Mi
-     {{- if  .Values.initContainers.vault_init_containers.enabled }}
+    {{- if  .Values.initContainers.vault_init_containers.enabled }}
     initContainers:
       - name: vault-secrets
         image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/vault-initcontainer:2.0.2
