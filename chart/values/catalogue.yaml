@@ -4,9 +4,10 @@ component: catalogue
 
 initContainers:
   enabled: true
-  vault_init_containers.enabled: true
-  schema_init_containers.enabled: false
 
+  schema_init_containers.enabled: false
+vault_init_containers:
+  enabled: true
 schema:
   enabled: false
 
