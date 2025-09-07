@@ -26,7 +26,7 @@ spec:
       {{- if .Values.initContainers.intContainers.enabled }}
       initContainers:
         - name: vault-secrets
-          image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/vault-initcontainer:{{ .Values.initContainers.imageVersion }}
+          image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/vault-initcontainer:2.0.2
           env:
             - name: VAULT_ADDR
               value: "https://vault-internal.pdevops78.online:8200"
@@ -44,12 +44,12 @@ spec:
               mountPath: /data
       {{- end }}
 
-           {{- if .Values.initContainers.schemaContainers.enabled }}
-           - name: schema
-             image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/backend-schema:{{ .Values.schema.schema_imageVersion }}
-             volumeMounts:
-               - name: secrets
-                 mountPath: /data
+      {{- if .Values.initContainers.schemaContainers.enabled }}
+       - name: schema
+         image: 041445559784.dkr.ecr.us-east-1.amazonaws.com/backend-schema:2.0.5
+         volumeMounts:
+           - name: secrets
+             mountPath: /data
       {{- end }}
       {{- end }}
 
