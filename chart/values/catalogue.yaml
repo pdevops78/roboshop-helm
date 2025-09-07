@@ -10,7 +10,7 @@ schema:
   schemaContainers.enabled: true
 
 containers:
-  appVersion: 2.0.2
+  appVersion: 2.0.3
 
 service:
   type: ClusterIP
