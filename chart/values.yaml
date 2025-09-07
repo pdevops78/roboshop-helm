@@ -1,0 +1,4 @@
+initContainers:
+  enabled: false
+  vault_init_containers.enabled: false
+  schema_init_containers.enabled: false
