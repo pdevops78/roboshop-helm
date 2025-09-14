@@ -2,24 +2,24 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Values.metadata.name }}
+  name: {{ .Values.component }}
   namespace: argocd
   labels:
     appName: {{ .Values.component }}
     projectName: {{ .Chart.Name }}
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.host }}
+    external-dns.alpha.kubernetes.io/hostname: frontend-dev.pdevops78.online
 spec:
   ingressClassName: nginx
   rules:
-    - host: {{ .Values.ingress.host }}
+    - host: frontend-dev.pdevops78.online
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: {{ .Values.component }}
+                name: frontend
                 port:
                   number: 80
 {{- end }}
